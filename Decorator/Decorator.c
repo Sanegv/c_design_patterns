@@ -63,6 +63,20 @@ void deleteNotifier(NotifierInterface* notifierPtr){
         return;
     if(notifierPtr->stack != NULL)
         deleteNotifier(notifierPtr->stack);
+    switch (notifierPtr->type) {
+        case NOTIFIER:
+            free(notifierPtr->NotifierPtr->notifier);
+            break;
+        case SMS:
+            free(notifierPtr->NotifierPtr->sms);
+            break;
+        case EMAIL:
+            free(notifierPtr->NotifierPtr->email);
+            break;
+        case DISCORD:
+            free(notifierPtr->NotifierPtr->discord);
+            break;
+    }
     free(notifierPtr->NotifierPtr);
 }
 
